@@ -1,7 +1,8 @@
 import requests
+import datetime as dt
 
-APP_ID = 'ed2e8b7'
-API_KEY = 'db72511a8066004bfbb524169d730e1'
+APP_ID = 'ed2e8b73'
+API_KEY = 'db72511a8066004bfbb524169d730e12'
 exercise_endpoint = 'https://trackapi.nutritionix.com/v2/natural/exercise'
 GENDER = "male"
 WEIGHT_KG = 99.1
@@ -26,4 +27,31 @@ exercise_config = {
 }
 
 response = requests.post(url=exercise_endpoint, json=exercise_config, headers=headers)
+print(response.text)
+data = response.json()['exercises']
+print(data[0])
+now = dt.datetime.now()
+todays_date = now.strftime("%d/%m/%Y")
+workout_time = now.strftime('%H:%M:%S')
+print(todays_date)
+print(workout_time)
+workout = data[0]["name"].title()
+duration = data[0]['duration_min']
+calories = data[0]['nf_calories']
+print(workout, duration, calories)
+
+sheety_endpoint = "https://api.sheety.co/496fe8eedb5a1a546845f2ff2f5480aa/copyOfMyWorkouts/workouts"
+
+sheety_config = {
+  'workout': {
+    'date': todays_date,
+    'time': workout_time,
+    'exercise': workout,
+    'duration': duration,
+    'calories': calories
+  }
+}
+
+response = requests.post(url=sheety_endpoint, json=sheety_config)
+response.raise_for_status()
 print(response.text)
