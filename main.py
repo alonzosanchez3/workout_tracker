@@ -49,5 +49,9 @@ sheety_config = {
   }
 }
 
-response = requests.post(url=sheety_endpoint, json=sheety_config)
+sheety_headers = {
+  "Authorization": "Bearer AAAAAAAAAAAAAAAAAAAAAMLheAAAAAAA0%2BuSeid%2BULvsea4JtiGRiSDSJSI%3DEUifiRBkKG5E2XzMDjRfl76ZC9Ub0wnz4XsNiRVBChTYbJcE3F"
+}
+
+response = requests.post(url=sheety_endpoint, json=sheety_config, headers=sheety_headers)
 response.raise_for_status()
