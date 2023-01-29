@@ -27,18 +27,15 @@ exercise_config = {
 }
 
 response = requests.post(url=exercise_endpoint, json=exercise_config, headers=headers)
-print(response.text)
 data = response.json()['exercises']
-print(data[0])
+
 now = dt.datetime.now()
 todays_date = now.strftime("%d/%m/%Y")
 workout_time = now.strftime('%H:%M:%S')
-print(todays_date)
-print(workout_time)
 workout = data[0]["name"].title()
 duration = data[0]['duration_min']
 calories = data[0]['nf_calories']
-print(workout, duration, calories)
+
 
 sheety_endpoint = "https://api.sheety.co/496fe8eedb5a1a546845f2ff2f5480aa/copyOfMyWorkouts/workouts"
 
@@ -54,4 +51,3 @@ sheety_config = {
 
 response = requests.post(url=sheety_endpoint, json=sheety_config)
 response.raise_for_status()
-print(response.text)
