@@ -1,8 +1,14 @@
 import requests
 import datetime as dt
+import os
+from dotenv import load_dotenv
 
-APP_ID = 'ed2e8b73'
-API_KEY = 'db72511a8066004bfbb524169d730e12'
+load_dotenv()
+
+APP_ID = os.getenv('APP_ID')
+print(APP_ID)
+API_KEY = os.getenv('API_KEY')
+print(API_KEY)
 exercise_endpoint = 'https://trackapi.nutritionix.com/v2/natural/exercise'
 GENDER = "male"
 WEIGHT_KG = 99.1
@@ -37,7 +43,7 @@ duration = data[0]['duration_min']
 calories = data[0]['nf_calories']
 
 
-sheety_endpoint = "https://api.sheety.co/496fe8eedb5a1a546845f2ff2f5480aa/copyOfMyWorkouts/workouts"
+sheety_endpoint = os.getenv('SHEETY_ENDPOINT')
 
 sheety_config = {
   'workout': {
@@ -50,7 +56,7 @@ sheety_config = {
 }
 
 sheety_headers = {
-  "Authorization": "Bearer"
+  "Authorization": f"Bearer {os.getenv('BEARER')}"
 }
 
 response = requests.post(url=sheety_endpoint, json=sheety_config, headers=sheety_headers)
