@@ -6,9 +6,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 APP_ID = os.getenv('APP_ID')
-print(APP_ID)
 API_KEY = os.getenv('API_KEY')
-print(API_KEY)
 exercise_endpoint = 'https://trackapi.nutritionix.com/v2/natural/exercise'
 GENDER = "male"
 WEIGHT_KG = 99.1
